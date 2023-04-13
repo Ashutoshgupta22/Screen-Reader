@@ -24,22 +24,28 @@ class MainActivity : AppCompatActivity() {
         window.statusBarColor = color
 
         //checking if our accessibility service is running
+        checkServiceStatus()
+
+
+    }
+
+    private fun checkServiceStatus() {
+
+        binding.tvServiceStatus.text = resources.getString(R.string.service_not_running)
+        binding.tvInfo.text = resources.getString(R.string.turn_on_service_info)
+
         val manager = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
         val serviceList = manager
             .getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
 
-        for (service in serviceList) {
+        MainActivityPresenter().checkServiceStatus(serviceList,binding,this)
+    }
 
-            if (service.resolveInfo.serviceInfo.packageName == packageName &&
-                    service.resolveInfo.serviceInfo.name == MyAccessibilityService::class.simpleName) {
+    override fun onResume() {
+        super.onResume()
 
-                Log.d("MainActivity", "onCreate: our accessibility service is running")
-                binding.tvServiceStatus.text = resources.getString(R.string.service_running)
-                binding.tvInfo.text = resources.getString(R.string.turn_off_service_info)
-
-            }
-        }
-
+        Log.i("MainActivity", "onResume: ")
+        checkServiceStatus()
 
     }
 }
