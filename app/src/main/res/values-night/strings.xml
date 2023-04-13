@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="service_running">Accessibility Service is running</string>
+    <string name="turn_on_service_info">Turn on Accessibility Service for this app from setting</string>
+    <string name="service_not_running">Accessibility Service is not running</string>
+    <string name="turn_off_service_info">Turn off Accessibility Service for this app from setting</string>
+</resources>
